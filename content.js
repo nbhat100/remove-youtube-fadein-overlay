@@ -8,7 +8,6 @@ if (isYouTubeEmbed()) {
   let isPaused = false;
 
   function scheduleFadeOut(overlay, delay) {
-    // Clear any existing timer
     if (fadeOutTimer) {
       clearTimeout(fadeOutTimer);
     }
@@ -23,10 +22,10 @@ if (isYouTubeEmbed()) {
     const overlay = document.getElementById('player-control-overlay');
     if (!overlay) return;
 
-    // Detect pause/play state changes
     const video = document.querySelector('video');
     if (video) {
       isPaused = video.classList.contains('paused-mode');
+      // when the video is playing, add the fadein class back so the overlay is there when needed
       if (!isPaused) {
           overlay.classList.add('fadein');
       }
@@ -38,7 +37,6 @@ if (isYouTubeEmbed()) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           const target = mutation.target;
           if (target.id === 'player-control-overlay' && target.classList.contains('fadein')) {
-            // 1 second delay when paused, 3 seconds otherwise
             const delay = isPaused ? 1000 : 3000;
             scheduleFadeOut(overlay, delay);
           }
@@ -51,8 +49,8 @@ if (isYouTubeEmbed()) {
       attributeFilter: ['class']
     });
 
-    // Keep overlay visible on mouse hover
-    overlay.addEventListener('mouseenter', () => {
+    // Keep overlay visible when moving the mouse in the video area
+    overlay.addEventListener('mousemove', () => {
       if (fadeOutTimer) {
         clearTimeout(fadeOutTimer);
         overlay.classList.add('fadein');
@@ -61,7 +59,6 @@ if (isYouTubeEmbed()) {
 
     overlay.addEventListener('mouseleave', () => {
       if (overlay.classList.contains('fadein')) {
-        // Almost immediate on mouse leave (100ms)
         scheduleFadeOut(overlay, 100);
       }
     });
