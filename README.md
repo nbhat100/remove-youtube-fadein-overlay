@@ -1,4 +1,3 @@
-```markdown
 # YouTube Embedded Player - Quick Fade Controls
 
 A lightweight browser extension that improves the user experience of embedded YouTube players by automatically hiding the control overlay after a short delay.
@@ -88,4 +87,3 @@ Issues and pull requests are welcome! Feel free to suggest improvements or repor
 ## Disclaimer
 
 This is an independent project and is not affiliated with, endorsed by, or connected to YouTube or Google in any way.
-```
