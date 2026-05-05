@@ -6,6 +6,16 @@ function isYouTubeEmbed() {
 if (isYouTubeEmbed()) {
   let fadeOutTimer = null;
   let isPaused = false;
+  let fadeInAddedCount = 0;
+  let fadeInRemovedCount = 0;
+
+  function updateStoredMetrics(addedDelta, removedDelta) {
+    chrome.runtime?.sendMessage({
+      type: 'UPDATE_METRICS',
+      addedDelta,
+      removedDelta
+    });
+  }
 
   function scheduleFadeOut(overlay, delay) {
     if (fadeOutTimer) {
@@ -36,7 +46,24 @@ if (isYouTubeEmbed()) {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           const target = mutation.target;
-          if (target.id === 'player-control-overlay' && target.classList.contains('fadein')) {
+          if (target.id !== 'player-control-overlay') {
+            return;
+          }
+
+          const oldValue = mutation.oldValue || '';
+          const oldHasFadein = oldValue.split(/\s+/).includes('fadein');
+          const newHasFadein = target.classList.contains('fadein');
+
+          if (!oldHasFadein && newHasFadein) {
+            fadeInAddedCount += 1;
+            updateStoredMetrics(1, 0);
+          }
+          if (oldHasFadein && !newHasFadein) {
+            fadeInRemovedCount += 1;
+            updateStoredMetrics(0, 1);
+          }
+
+          if (newHasFadein) {
             const delay = isPaused ? 1000 : 3000;
             scheduleFadeOut(overlay, delay);
           }
@@ -46,7 +73,8 @@ if (isYouTubeEmbed()) {
 
     observer.observe(overlay, {
       attributes: true,
-      attributeFilter: ['class']
+      attributeFilter: ['class'],
+      attributeOldValue: true
     });
 
     // Keep overlay visible when moving the mouse in the video area

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Fade Metrics</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: system-ui, sans-serif;
+      width: 220px;
+    }
+    h1 {
+      font-size: 16px;
+      margin: 0 0 12px;
+    }
+    .metric {
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+    .label {
+      color: #444;
+    }
+    .value {
+      font-weight: 700;
+    }
+    button {
+      margin-top: 14px;
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      background: #f8f8f8;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fadein Metrics</h1>
+  <div class="metric">
+    <span class="label">Added</span>
+    <span id="added" class="value">0</span>
+  </div>
+  <div class="metric">
+    <span class="label">Removed</span>
+    <span id="removed" class="value">0</span>
+  </div>
+  <button id="refresh">Reset counts</button>
+  <script src="popup.js"></script>
+</body>
+</html>
