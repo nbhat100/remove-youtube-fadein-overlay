@@ -8,9 +8,14 @@ When you pause an embedded YouTube video, the control overlay (play button, prog
 
 - **1 second** when the video is paused
 - **100ms** when you move your mouse away from the controls
-- **Never hides** while your mouse is hovering over the controls
 
 This creates a cleaner viewing experience while keeping controls easily accessible when needed.
+
+Before adding the extension, when pausing the video the overlay continues to display until the video is resumed.
+![Image of embedded YouTube player showing overlay controls](exampleFadeInOverlayPausedState.png)
+
+After adding the extension, the overlay is removed after a delay after pausing the video.
+![Image of the embedded YouTube player without the overlay controls in the paused state](pausedStateWithExtension.png)
 
 ## Features
 
