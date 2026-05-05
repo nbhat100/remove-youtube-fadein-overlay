@@ -8,9 +8,10 @@
     "128": "icons/icon128.png"
   },
   "permissions": ["tabs"],
-  "background": {
-    "scripts": ["background.js"]
-  },
+  "background": [{
+    "scripts": ["background.js"],
+    "service_worker": "background.js"
+  }],
   "action": {
     "default_popup": "popup.html"
   },
