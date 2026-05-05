@@ -57,6 +57,15 @@ if (isYouTubeEmbed()) {
       }
     });
 
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Space' || event.key === ' ') {
+        if (fadeOutTimer) {
+          clearTimeout(fadeOutTimer);
+          overlay.classList.add('fadein');
+        }
+      }
+    });
+
     overlay.addEventListener('mouseleave', () => {
       if (overlay.classList.contains('fadein')) {
         scheduleFadeOut(overlay, 100);
