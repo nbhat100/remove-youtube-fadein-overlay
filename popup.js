@@ -32,7 +32,6 @@ function resetMetrics() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Popup loaded');
   refreshMetrics();
   document.getElementById('refresh').addEventListener('click', resetMetrics);
 });
